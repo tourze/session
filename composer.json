@@ -1,0 +1,34 @@
+{
+  "name": "tourze/session",
+  "description": "会话相关",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "YwiSax",
+      "email": "25803471@qq.com"
+    }
+  ],
+  "require": {
+    "tourze/core": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "tourze\\Session\\": "src/"
+    },
+    "files": [
+      "bootstrap.php"
+    ]
+  },
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://git.oschina.net/ywisax/com.tourze.php.core.git"
+    },
+    {
+      "type": "composer",
+      "url": "http://php.composer.org/repo/packagist/"
+    },
+    {"packagist": false}
+  ]
+}
