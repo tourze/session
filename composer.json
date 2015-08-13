@@ -1,6 +1,6 @@
 {
   "name": "tourze/session",
-  "description": "会话相关",
+  "description": "会话操作类库",
   "minimum-stability": "stable",
   "license": "proprietary",
   "authors": [
@@ -19,16 +19,5 @@
     "files": [
       "bootstrap.php"
     ]
-  },
-  "repositories": [
-    {
-      "type": "git",
-      "url": "https://git.oschina.net/ywisax/com.tourze.php.core.git"
-    },
-    {
-      "type": "composer",
-      "url": "http://php.composer.org/repo/packagist/"
-    },
-    {"packagist": false}
-  ]
+  }
 }
