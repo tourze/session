@@ -94,6 +94,8 @@ class Flash extends Object implements ArrayAccess, IteratorAggregate, Countable
 
         // 加载会话消息
         $this->loadMessages();
+
+        parent::__construct();
     }
 
     /**

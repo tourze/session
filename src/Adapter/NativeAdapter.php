@@ -3,6 +3,7 @@
 namespace tourze\Session\Adapter;
 
 use tourze\Base\Helper\Cookie;
+use tourze\Http\Http;
 use tourze\Session\SessionAdapter;
 
 /**
@@ -45,7 +46,7 @@ class NativeAdapter extends SessionAdapter
         }
 
         // Start the session
-        session_start();
+        Http::sessionStart();
 
         // Use the $_SESSION global for storing data
         $this->_data =& $_SESSION;
@@ -65,27 +66,24 @@ class NativeAdapter extends SessionAdapter
     }
 
     /**
-     * @return  bool
+     * @return bool
      */
     protected function _write()
     {
-        // Write and close the session
-        session_write_close();
-
+        Http::sessionWriteClose();
         return true;
     }
 
     /**
+     * 重启会话
+     *
      * @return  bool
      */
     protected function _restart()
     {
-        // Fire up a new session
-        $status = session_start();
-
-        // Use the $_SESSION global for storing data
+        $status = Http::sessionStart();
+        // 保存当前会话数据
         $this->_data =& $_SESSION;
-
         return $status;
     }
 
