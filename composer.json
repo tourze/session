@@ -1,6 +1,6 @@
 {
   "name": "tourze/session",
-  "description": "会话操作类库",
+  "description": "途者框架-会话操作类库",
   "minimum-stability": "stable",
   "license": "proprietary",
   "authors": [
@@ -18,6 +18,14 @@
     },
     "files": [
       "bootstrap.php"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "tourze\\Session\\": "src/"
+    },
+    "files": [
+      "bootstrap-dev.php"
     ]
   }
 }

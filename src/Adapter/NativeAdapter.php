@@ -2,31 +2,31 @@
 
 namespace tourze\Session\Adapter;
 
+use tourze\Base\Base;
 use tourze\Base\Helper\Cookie;
-use tourze\Http\Http;
 use tourze\Session\SessionAdapter;
 
 /**
- * Native PHP session class.
+ * 使用原生的PHP session
+ * 这个方法的优点是方便，缺点是无法实现分布式
+ * 当然如果在php.ini中直接设置session共享，也是可以实现的
  *
- * @package    Base
- * @category   Session
- * @author     YwiSax
+ * @package tourze\Session\Adapter
  */
 class NativeAdapter extends SessionAdapter
 {
 
     /**
-     * @return  string
+     * @return string
      */
     public function id()
     {
-        return session_id();
+        return Base::getHttp()->sessionID();
     }
 
     /**
-     * @param   string $id session id
-     * @return  null
+     * @param  string $id session id
+     * @return null
      */
     protected function _read($id = null)
     {
@@ -41,28 +41,23 @@ class NativeAdapter extends SessionAdapter
 
         if ($id)
         {
-            // Set the session id
-            session_id($id);
+            Base::getHttp()->sessionID($id);
         }
 
-        // Start the session
-        Http::sessionStart();
-
-        // Use the $_SESSION global for storing data
+        Base::getHttp()->sessionStart();
         $this->_data =& $_SESSION;
 
         return null;
     }
 
     /**
-     * @return  string
+     * @return string
      */
     protected function _regenerate()
     {
-        // Regenerate the session id
-        session_regenerate_id();
+        Base::getHttp()->sessionRegenerateID();
 
-        return session_id();
+        return Base::getHttp()->sessionID();
     }
 
     /**
@@ -70,25 +65,25 @@ class NativeAdapter extends SessionAdapter
      */
     protected function _write()
     {
-        Http::sessionWriteClose();
+        Base::getHttp()->sessionWriteClose();
         return true;
     }
 
     /**
      * 重启会话
      *
-     * @return  bool
+     * @return bool
      */
     protected function _restart()
     {
-        $status = Http::sessionStart();
+        $status = Base::getHttp()->sessionStart();
         // 保存当前会话数据
         $this->_data =& $_SESSION;
         return $status;
     }
 
     /**
-     * @return  bool
+     * @return bool
      */
     protected function _destroy()
     {
@@ -96,7 +91,7 @@ class NativeAdapter extends SessionAdapter
         session_destroy();
 
         // Did destruction work?
-        $status = ! session_id();
+        $status = ! Base::getHttp()->sessionID();
 
         if ($status)
         {
