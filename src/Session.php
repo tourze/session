@@ -266,10 +266,7 @@ abstract class Session
         {
             if (is_string($data = $this->_read($id)))
             {
-                // Decode the data
                 $data = $this->_decode($data);
-
-                // Unserialize the data
                 $data = $this->_unserialize($data);
             }
             else
@@ -279,9 +276,10 @@ abstract class Session
         }
         catch (Exception $e)
         {
-            // Error reading the session, usually a corrupt session.
-            throw new SessionException('Error reading session data because ":reason".', [
+            throw new SessionException('Error reading session data because ":reason", in [:file]:line.', [
                 ':reason' => $e->getMessage(),
+                ':file'   => $e->getFile(),
+                ':line'   => $e->getLine(),
             ], SessionException::SESSION_CORRUPT);
         }
 
