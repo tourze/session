@@ -10,7 +10,7 @@
     }
   ],
   "require": {
-    "tourze/core": "dev-master"
+    "tourze/base": "dev-master"
   },
   "autoload": {
     "psr-4": {
@@ -22,7 +22,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "tourze\\Session\\": "src/"
+      "tourze\\Session\\": "tests/"
     },
     "files": [
       "bootstrap-dev.php"
